@@ -1,3 +1,5 @@
+"""  guess word for hangman game """
+
 word_list = [
     'monkey', 'mankind', 'python',
     'toad', 'gazelle', 'impala',
