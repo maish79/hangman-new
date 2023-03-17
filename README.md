@@ -1,31 +1,18 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+This is a simple hangman game written in Python. The game randomly selects a word from a pre-defined list and the player has to guess the word one letter at a time. The player has six attempts to guess the word. If the player is unable to guess the word in six attempts, the game is over.
 
-Welcome maish79,
+Prerequisites
+This game requires Python 3 to be installed on your system.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+Getting Started
+To start playing, simply run the play_hangman() function in your Python environment.
 
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+How to Play
+The game will display the hangman logo and prompt the player to enter their name.
+The player will be given six attempts to guess the word by entering one letter at a time.
+If the player enters an invalid input or a letter they have already guessed, the game will prompt them to try again.
+If the player correctly guesses a letter in the word, the letter will be revealed in its correct position.
+If the player incorrectly guesses a letter, they will lose a life. The game will display a part of the hangman for each lost life.
+The game ends when the player correctly guesses the word or runs out of lives.
+The player can choose to play again after the game is over.
+Acknowledgements
+The list of words used in the game is provided by the hangman_letters module.
