@@ -137,7 +137,7 @@ def play_hangman():
     blank = ["_"] * len(word)
 
     while not end_of_game:
-        guess = get_guess(alphabet, guessed)
+        guess = get_guess(guessed, alphabet)
         guessed = update_guessed(guess, guessed)
         blank = update_blank(guess, word, blank)
         lives = update_lives(guess, word, lives)
