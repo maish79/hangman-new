@@ -1,41 +1,45 @@
+"""
+modules for hangman
+
+"""
+
+
 import random
+import pyfiglet
 import hangman_letters
 
 
 def display_logo():
     """Displays the hangman logo"""
-    logo = '''
-                      _                                             
-                     | |                                            
-                     | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
-                     | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
-                     | | | | (_| | | | | (_| | | | | | | (_| | | | |
-                     |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
-                                         __/ |                      
-                                        |___/    '''
+    logo = pyfiglet.figlet_format("welcome to\n Hangman",
+                                  font="standard", justify="center")
     print(logo)
 
 
 def get_player_name():
     """Prompts the player to enter their name and returns the name"""
-    name = input("\t\t\t\t\tEnter your name:")
-    print("Welcome", name, "!")
-    return name
+    player_name = input("Please enter your name: ")
+    return player_name
 
 
-def get_guess(a, guessed):
+name = get_player_name()
+print("Hello, " + name + "! Welcome to the game")
+
+
+def get_guess(guessed_letters, all_letters):
     """
     Prompts the player to enter a letter and validates the input.
-    Returns the guessed letter if it is a valid single letter not previously guessed.
+    Returns the guessed letter if it is a valid single
+    letter not previously guessed.
     """
     while True:
         guess = input("Guess a letter:\n").lower()
 
         if len(guess) != 1:
             print("Please pick a single letter.")
-        elif guess not in a:
+        elif guess not in all_letters:
             print("Please make sure enter a letter.")
-        elif guess in guessed:
+        elif guess in guessed_letters:
             print(f'You already guessed the letter {guess}, please try again.')
         else:
             return guess
@@ -48,12 +52,13 @@ def update_guessed(guess, guessed):
 
 def update_blank(guess, word, blank):
     """
-    Updates the blank spaces with the newly guessed letter if it is present in the word.
+    Updates the blank spaces with the newly guessed
+    letter if it is present in the word.
     Returns the updated blank spaces.
     """
     if guess in word:
-        for i in range(len(word)):
-            if word[i] == guess:
+        for i, letter in enumerate(word):
+            if letter == guess:
                 blank[i] = guess
         print("Congrats you found a match")
     else:
@@ -63,7 +68,8 @@ def update_blank(guess, word, blank):
 
 def update_lives(guess, word, lives):
     """
-    Decreases the number of lives if the guessed letter is not present in the word.
+    Decreases the number of lives if the guessed
+    letter is not present in the word.
     Returns the updated number of lives.
     """
     if guess not in word:
@@ -78,21 +84,21 @@ def play_hangman():
  +---+
  |   |
  O   |
-/|\  |
-/ \  |
+/|\\ |
+/ \\ |
      |
 =======''', '''
  +---+
  |   |
  O   |
-/|\  |
-  \  |
+/|\\ |
+  \\ |
      |
 =======''', '''
  +---+
  |   |
  O   |
-/|\  |
+/|\\ |
      |
      |
 =======''', '''
@@ -119,20 +125,19 @@ def play_hangman():
      |
 =======''']
 
-    a = set("abcdefghijklmnopqrstuvwxyz")
+    alphabet = set("abcdefghijklmnopqrstuvwxyz")
     lives = 6
     guessed = ""
     end_of_game = False
     word = random.choice(hangman_letters.word_list)
 
     display_logo()
-    name = get_player_name()
     print("You have 6 attempts to guess the word!")
 
     blank = ["_"] * len(word)
 
     while not end_of_game:
-        guess = get_guess(a, guessed)
+        guess = get_guess(alphabet, guessed)
         guessed = update_guessed(guess, guessed)
         blank = update_blank(guess, word, blank)
         lives = update_lives(guess, word, lives)
